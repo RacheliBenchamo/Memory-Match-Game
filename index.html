@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Memory Game</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+
+</head>
+<body>
+<div class="container" id="controller-screen">
+    <div class="p-2 mb-3 bg-light rounded-3">
+        <div class="container-fluid py-2">
+            <h3 class="display-5 fw-bold">Memory Game</h3>
+            <p class="col-md-8 fs-4">click on the cards to flip them and find the
+                <br>matching pairs with as little flips as possible.
+            </p>
+        </div>
+    </div>
+    <form id="start-screen">
+        <div class="container">
+            <div class="mb-2 row">
+                <div class="col-6">
+                    <label for="name" >Your name:<br></label>
+                    <input type="text" class="form-control" id="name" aria-describedby="Your name"
+                           placeholder="your name including letters and digits only"
+                           pattern="^[A-Za-z0-9]*$" maxlength="12" required>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <button type="submit" class="btn btn-primary" id=play-button>Play</button>
+            <button type="button" class="btn btn-light" data-toggle="collapse" data-target="#setting" aria-expanded="false" aria-controls="setting">Setting</button>
+            <button type="button" class="btn btn-light" data-toggle="modal" data-target="#Leaderboard" >High scores</button>
+            <div id="setting" class="collapse">
+                <div class="row">
+                    <div class="col-6 my-2">
+                        <label for="rows">Number of rows:</label>
+                        <select class="form-select" id="rows" onchange="checkSetting('rows error')">
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4" selected>4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <span id="rows error" class="text-danger"></span>
+                    </div>
+                    <div class="col-6 my-2">
+                        <label for="columns">Number of columns:</label>
+                        <select class="form-select" id="columns" onchange="checkSetting('cols error')">
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4" selected>4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <span id="cols error" class="text-danger"></span>
+                    </div>
+                    <div class="col-6">
+                        <label for="Delay">Delay(in seconds):</label>
+                        <select class="form-select" id="Delay">
+                            <option value="0.5">0.5</option>
+                            <option value="1" selected>1</option>
+                            <option value="1.5">1.5</option>
+                            <option value="2">2</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="Leaderboard" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="Leaderboard title">Leaderboard</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div id="Leaderboard table">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form><br/><br/>
+</div>
+<div class="container" id="game-screen" hidden>
+    <div class="row px-3" id="steps">Steps: 0</div>
+    <table class="table" id="game_board">
+    </table>
+    <button type="button" id=abandon-button class="btn btn-primary" data-toggle="collapse">Abandon</button>
+</div>
+
+<div class="container" id="game_over-screen" hidden>
+    <h6 class="display-5 fw-bold py=3" >Game Over!</h6>
+    <div class="row px-3" id="cards played"></div><br>
+    <div class="row px-3" id="score and rank"></div><br>
+    <div id="Leaderboard table copy"></div>
+    <button type="button" id=ok-button class="btn btn-primary" data-toggle="collapse">Ok</button>
+</div>
+</body>
+</html>
